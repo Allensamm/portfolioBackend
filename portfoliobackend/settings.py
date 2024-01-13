@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,11 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-46w7#b@echj4fvknwsp8x=(o%sn0qg3^mzvp%bpn(eh67@3r&3'
+# SECRET_KEY = 'django-insecure-46w7#b@echj4fvknwsp8x=(o%sn0qg3^mzvp%bpn(eh67@3r&3'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 TINYMCE_DEFAULT_CONFIG = {
     'height': 360,
@@ -50,7 +52,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
 ]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://allensamuel.vercel.app', 'pe-rxu4.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://allensamuel.vercel.app', 'portfoliobackend-9og0.onrender.com']
 
 AUTH_USER_MODEL = 'backend.AppUser'
 
@@ -121,6 +123,7 @@ DATABASES = {
     }
 }
 
+DATABASES['default'] = dj_database_url.parse("postgres://portfolio_backend_1fqx_user:KE0bCUb9UrgIXkvZlAF3kmCBlHlNqShy@dpg-cmbeurgcmk4c73dg2ipg-a.oregon-postgres.render.com/portfolio_backend_1fqx")
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
