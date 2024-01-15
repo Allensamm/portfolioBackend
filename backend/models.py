@@ -58,7 +58,7 @@ class Post(models.Model):
     
     projectname = models.CharField(max_length=200)
     Description = HTMLField(blank=True, null=True)
-    anyfile = models.FileField(upload_to='files/', null=True, blank=True)
+    anyfile = models.FileField(upload_to='media/', null=True, blank=True)
     linktoproject = models.URLField(null=True)
     largecontent = HTMLField(blank=True, null=True)
     image = models.ImageField(upload_to='blog_images/', null=True, blank=True)
